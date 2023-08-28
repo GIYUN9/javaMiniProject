@@ -16,11 +16,13 @@ public class ProductMenu {
 		System.out.println("2. 상품 조회");
 		System.out.println("3. 상품 구매");
 		System.out.println("4. 뒤로가기(메인 메뉴)");
+		System.out.print("번호를 입력해주세요 : ");
 		int pmNum = sc.nextInt();
 		
 		switch(pmNum) {
 			case 1:
 				System.out.println("상품명\t가격\t수량\t설명");
+				System.out.println(pc.printPro());
 				break;
 			case 2:
 				break;

@@ -12,18 +12,17 @@ public class Run {
 			System.out.println("1. 고객 메뉴");
 			System.out.println("2. 관리자 메뉴");
 			System.out.println("9. 프로그램 종료");
-			System.out.println("번호를 선택해주세요 : ");
+			System.out.print("번호를 입력해주세요 : ");
 			int mainNum = sc.nextInt();
 			
 			switch(mainNum) {
 				case 1:
-					// 1. 고객 메뉴
+					pm.CustomerMenu();
 					break;
 				case 2:
-					// 2. 관리자 로그인
+					pm.adminLoginMenu();
 					break;
 				case 9:
-					// 9. 프로그램 종료
 					System.out.println("[프로그램을 종료합니다.]");
 					return;
 				default:
