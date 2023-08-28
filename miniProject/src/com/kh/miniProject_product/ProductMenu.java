@@ -25,13 +25,16 @@ public class ProductMenu {
 					System.out.println(pc.printPro());
 					break;
 				case 2:
+					//상품명으로 상품 조회
 					break;
 				case 3:
+					// 상품구매 인덱스 선택후 수량 입력하면 리스트중 해당 인덱스에 (수량 - 입력수량값)
 					break;
 				case 4:
 					System.out.println("[뒤로가기] 메인 메뉴로 이동합니다.");
 					return;
 				default:
+					System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
 			}
 		}
 	}
