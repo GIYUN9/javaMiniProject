@@ -11,27 +11,28 @@ public class ProductMenu {
 	String adLoginPsw;
 	
 	public void CustomerMenu() {
-		System.out.println("=======고객 메뉴=======");
-		System.out.println("1. 전체 상품 목록 조회");
-		System.out.println("2. 상품 조회");
-		System.out.println("3. 상품 구매");
-		System.out.println("4. 뒤로가기(메인 메뉴)");
-		System.out.print("번호를 입력해주세요 : ");
-		int pmNum = sc.nextInt();
-		
-		switch(pmNum) {
-			case 1:
-				System.out.println("상품명\t가격\t수량\t설명");
-				System.out.println(pc.printPro());
-				break;
-			case 2:
-				break;
-			case 3:
-				break;
-			case 4:
-				break;
-			default:
-				
+		while(true) {
+			System.out.println("=======고객 메뉴=======");
+			System.out.println("1. 전체 상품 목록 조회");
+			System.out.println("2. 상품 조회");
+			System.out.println("3. 상품 구매");
+			System.out.println("4. 뒤로가기(메인 메뉴)");
+			System.out.print("번호를 입력해주세요 : ");
+			int pmNum = sc.nextInt();
+			
+			switch(pmNum) {
+				case 1:
+					System.out.println(pc.printPro());
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					System.out.println("[뒤로가기] 메인 메뉴로 이동합니다.");
+					return;
+				default:
+			}
 		}
 	}
 	
@@ -39,9 +40,11 @@ public class ProductMenu {
 		while(true) {
 			System.out.println("====== 관리자 로그인 ======");
 			System.out.print("아이디 : ");
-			adLoginId = sc.nextLine();
+			adLoginId = sc.next();
+			sc.nextLine();
 			System.out.print("비밀번호 : ");
-			adLoginPsw = sc.nextLine();
+			adLoginPsw = sc.next();
+			sc.nextLine();
 			
 			if(adLoginId.equals(ADMIN_ID)) {
 				if(adLoginPsw.equals(ADMIN_PSW)) {
@@ -71,7 +74,6 @@ public class ProductMenu {
 			
 			switch(adMNum) {
 				case 1:
-					// 상품 추가
 					System.out.println("====== 상품 추가 ======");
 					System.out.print("상품명 : ");
 					String name = sc.next();
@@ -87,7 +89,9 @@ public class ProductMenu {
 				case 2:
 					System.out.print("상품을 삭제하시겠습니까?(y/n) : ");
 					if(sc.next().charAt(0) == 'y') {
-						pc.remove();
+						System.out.println(pc.printPro());
+						System.out.print("삭제할 상품의 인덱스 번호를 입력해주세요 : ");
+						pc.remove(sc.nextInt());
 						System.out.println("삭제되었습니다.");
 					} else{
 						System.out.println("===취소===");

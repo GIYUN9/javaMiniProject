@@ -52,4 +52,4 @@ class Product {
 		return this.name+"\t"+this.price+"\t"+this.amount+"\t"+this.description;
 	}
 
-	}
+}
