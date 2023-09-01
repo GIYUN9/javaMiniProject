@@ -43,6 +43,7 @@ public class ProductMenu {
 					break;
 				case 3:
 					System.out.println(pc.printPro());
+					
 					System.out.println("구매하실 상품의 인덱스를 입력해주세요 : ");
 					int buyIndex = sc.nextInt();
 					
