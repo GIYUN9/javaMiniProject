@@ -25,10 +25,38 @@ public class ProductMenu {
 					System.out.println(pc.printPro());
 					break;
 				case 2:
-					//상품명으로 상품 조회
+					System.out.println("조회하실 상품명을 입력해주세요 : ");
+					String searchName = sc.next();
+					
+					boolean isExist = false;
+					for (Product product : pc.products) {
+						if (product.getName().equals(searchName)) {
+							System.out.println(product.printProduct());
+							isExist = true;
+							break;
+						}
+					}
+					
+					if (!isExist) {
+						System.out.println("조회하신 상품이 없습니다.");
+					}
 					break;
 				case 3:
-					// 상품구매 인덱스 선택후 수량 입력하면 리스트중 해당 인덱스에 (수량 - 입력수량값)
+					System.out.println(pc.printPro());
+					System.out.println("구매하실 상품의 인덱스를 입력해주세요 : ");
+					int buyIndex = sc.nextInt();
+					
+					Product product = pc.products.get(buyIndex);
+					
+					System.out.println("구매하실 수량을 입력해주세요 : ");
+					int buyAmount = sc.nextInt();
+					
+					if (product.getAmount() >= buyAmount) {
+						product.setAmount(product.getAmount() - buyAmount);
+						System.out.println("구매되었습니다.");
+					} else {
+						System.out.println("재고가 부족합니다.");
+					}
 					break;
 				case 4:
 					System.out.println("[뒤로가기] 메인 메뉴로 이동합니다.");
