@@ -55,7 +55,7 @@ public class ProductMenu {
 						product.setAmount(product.getAmount() - buyAmount);
 						System.out.println("구매되었습니다.");
 					} else {
-						System.out.println("재고가 부족합니다. ");
+						System.out.println("재고가 부족합니다.");
 					}
 					break;
 				case 4:
