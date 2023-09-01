@@ -23,7 +23,7 @@ public class Run {
 					pm.adminLoginMenu();
 					break;
 				case 9:
-					System.out.println("[프로그램을 종료합니다.]");
+					System.out.println("[프로그램을 종료합니다]");
 					return;
 				default:
 					System.out.println("잘못된 번호입니다. 다시입력해주세요.");
