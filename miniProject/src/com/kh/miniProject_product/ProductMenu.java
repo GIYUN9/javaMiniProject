@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class ProductMenu {
 	ProductController pc = new ProductController();
 	Scanner sc = new Scanner(System.in);
-	private static final String ADMIN_ID = "2"; 
-	private static final String ADMIN_PSW = "2"; 
+	private static final String ADMIN_ID = "admin01"; 
+	private static final String ADMIN_PSW = "admin01"; 
 	String adLoginId;
 	String adLoginPsw;
 	
