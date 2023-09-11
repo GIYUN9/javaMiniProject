@@ -1,20 +1,22 @@
 package com.kh.miniProject_product;
 
 class Product {
-	  String name;
-	  int price;
-	  int amount;
-	  String description;
+	
+	int pro_no;
+	String name;
+	int price;
+	int amount;
+	String description;
 
-	  public Product() {
-	  }
+  public Product() {
+  }
 
-	  public Product(String name, int price, int amount, String description) {
-	    this.name = name;
-	    this.price = price;
-	    this.amount = amount;
-	    this.description = description;
-	  }
+  public Product(String name, int price, int amount, String description) {
+    this.name = name;
+    this.price = price;
+    this.amount = amount;
+    this.description = description;
+  }
 
 	public String getName() {
 		return name;
