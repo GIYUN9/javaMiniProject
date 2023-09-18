@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class ProductMenu {
 	ProductController pc = new ProductController();
 	Scanner sc = new Scanner(System.in);
-	private static final String ADMIN_ID = "admin01"; 
-	private static final String ADMIN_PSW = "admin01"; 
+	private static final String ADMIN_ID = "2"; 
+	private static final String ADMIN_PSW = "2"; 
 	String adLoginId;
 	String adLoginPsw;
 	
@@ -29,9 +29,9 @@ public class ProductMenu {
 					String searchName = sc.next();
 					
 					boolean isExist = false;
-					for (Product product : pc.products) {
-						if (product.getName().equals(searchName)) {
-							System.out.println(product.printProduct());
+					for (vo_Product product : pc.products) {
+						if (product.getPro_name().equals(searchName)) {
+							System.out.println(product.toString());
 							isExist = true;
 							break;
 						}
@@ -47,13 +47,13 @@ public class ProductMenu {
 					System.out.println("구매하실 상품의 인덱스를 입력해주세요 : ");
 					int buyIndex = sc.nextInt();
 					
-					Product product = pc.products.get(buyIndex);
+					vo_Product product = pc.products.get(buyIndex);
 					
 					System.out.println("구매하실 수량을 입력해주세요 : ");
 					int buyAmount = sc.nextInt();
 					
-					if (product.getAmount() >= buyAmount) {
-						product.setAmount(product.getAmount() - buyAmount);
+					if (product.getPro_amount() >= buyAmount) {
+						product.setPro_amount(product.getPro_amount() - buyAmount);
 						System.out.println("구매되었습니다.");
 					} else {
 						System.out.println("재고가 부족합니다.");
