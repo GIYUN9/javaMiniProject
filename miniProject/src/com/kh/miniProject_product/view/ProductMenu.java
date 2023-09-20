@@ -143,9 +143,9 @@ public class ProductMenu {
 					System.out.print("수량 : ");
 					int amount = sc.nextInt();
 					System.out.print("설명 : ");
-					sc.nextLine(); //?
+					sc.nextLine(); 
 					String des = sc.nextLine();
-					pc.add(name, price, amount, des);
+					pc.insertProduct(name, price, amount, des);
 					break;
 				case 2:
 					System.out.print("상품을 삭제하시겠습니까?(y/n) : ");

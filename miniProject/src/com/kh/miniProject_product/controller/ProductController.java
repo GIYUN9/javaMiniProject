@@ -14,7 +14,7 @@ public class ProductController {
 	public void insertProduct(String pro_name, int pro_price, int pro_amount, String pro_description){
 		Product p = new Product(pro_name, pro_price, pro_amount, pro_description);
 	
-		int result = new ProductService().insertProduct(m); //이것도 만들기 하나 수행하도록 넘어가면서 하나씩 기능완성하기
+		int result = new ProductService().insertProduct(p); //이것도 만들기 하나 수행하도록 넘어가면서 하나씩 기능완성하기
 	}
 
 	
