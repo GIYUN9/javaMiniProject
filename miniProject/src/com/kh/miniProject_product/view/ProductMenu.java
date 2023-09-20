@@ -1,6 +1,9 @@
-package com.kh.miniProject_product;
+package com.kh.miniProject_product.view;
 
 import java.util.Scanner;
+
+import com.kh.miniProject_product.controller.ProductController;
+import com.kh.miniProject_product.model.vo.Product;
 
 public class ProductMenu {
 	ProductController pc = new ProductController();
@@ -9,6 +12,32 @@ public class ProductMenu {
 	private static final String ADMIN_PSW = "2"; 
 	String adLoginId;
 	String adLoginPsw;
+	
+	public void mainMenu() {
+		while(true) {
+			System.out.println("======= Main =======");
+			System.out.println("1. 고객 메뉴");
+			System.out.println("2. 관리자 메뉴");
+			System.out.println("9. 프로그램 종료");
+			System.out.print("번호를 입력해주세요 : ");
+			int mainNum = sc.nextInt();
+			
+			switch(mainNum) {
+				case 1:
+					CustomerMenu();
+					break;
+				case 2:
+					adminLoginMenu();
+					break;
+				case 9:
+					System.out.println("[프로그램을 종료합니다]");
+					return;
+				default:
+					System.out.println("잘못된 번호입니다. 다시입력해주세요.");
+					break;
+			}
+		}
+	}
 	
 	public void CustomerMenu() {
 		while(true) {
@@ -29,7 +58,7 @@ public class ProductMenu {
 					String searchName = sc.next();
 					
 					boolean isExist = false;
-					for (vo_Product product : pc.products) {
+					for (Product product : pc.products) {
 						if (product.getPro_name().equals(searchName)) {
 							System.out.println(product.toString());
 							isExist = true;
@@ -47,7 +76,7 @@ public class ProductMenu {
 					System.out.println("구매하실 상품의 인덱스를 입력해주세요 : ");
 					int buyIndex = sc.nextInt();
 					
-					vo_Product product = pc.products.get(buyIndex);
+					Product product = pc.products.get(buyIndex);
 					
 					System.out.println("구매하실 수량을 입력해주세요 : ");
 					int buyAmount = sc.nextInt();

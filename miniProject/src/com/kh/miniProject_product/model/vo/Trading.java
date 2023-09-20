@@ -1,19 +1,19 @@
-package com.kh.miniProject_product;
+package com.kh.miniProject_product.model.vo;
 
 import java.sql.Date;
 
-public class vo_Trading {
+public class Trading {
 	private int tra_no;
 	private int cus_no;
 	private int pro_no;
 	private String tra_method;
 	private Date tra_date;
 	
-	public vo_Trading() {
+	public Trading() {
 		
 	}
 
-	public vo_Trading(int tra_no, int cus_no, int pro_no, String tra_method, Date tra_date) {
+	public Trading(int tra_no, int cus_no, int pro_no, String tra_method, Date tra_date) {
 		super();
 		this.tra_no = tra_no;
 		this.cus_no = cus_no;

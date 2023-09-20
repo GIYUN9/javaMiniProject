@@ -1,6 +1,6 @@
-package com.kh.miniProject_product;
+package com.kh.miniProject_product.model.vo;
 
-public class vo_Product {
+public class Product {
 	//필드
 	private int pro_no;
 	private String pro_name;
@@ -9,11 +9,11 @@ public class vo_Product {
 	private String pro_description;
 
 	//생성자
-	public vo_Product() {
+	public Product() {
 		
 	}
 	
-	public vo_Product(String pro_name, int pro_price, int pro_amount, String pro_description) {
+	public Product(String pro_name, int pro_price, int pro_amount, String pro_description) {
 		super();
 		this.pro_name = pro_name;
 		this.pro_price = pro_price;
@@ -21,7 +21,7 @@ public class vo_Product {
 		this.pro_description = pro_description;
 	}
 
-	public vo_Product(int pro_no, String pro_name, int pro_price, int pro_amount, String pro_description) {
+	public Product(int pro_no, String pro_name, int pro_price, int pro_amount, String pro_description) {
 		super();
 		this.pro_no = pro_no;
 		this.pro_name = pro_name;

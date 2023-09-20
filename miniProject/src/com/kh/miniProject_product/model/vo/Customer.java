@@ -1,19 +1,19 @@
-package com.kh.miniProject_product;
+package com.kh.miniProject_product.model.vo;
 
 import java.sql.Date;
 
-public class vo_Customer {
+public class Customer {
 	private int cus_no;
 	private String cus_id;
 	private String cus_pwd;
 	private String nickName;
 	private Date enrolldate;
 	
-	public vo_Customer() {
+	public Customer() {
 		
 	}
 
-	public vo_Customer(int cus_no, String cus_id, String cus_pwd, String nickName, Date enrolldate) {
+	public Customer(int cus_no, String cus_id, String cus_pwd, String nickName, Date enrolldate) {
 		super();
 		this.cus_no = cus_no;
 		this.cus_id = cus_id;

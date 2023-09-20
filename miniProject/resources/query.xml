@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="insertCustomer">
+		INSERT INTO CUSTOMER VALUES(SEQ_CUS_NO.NEXTVAL, ?, ?, ?, SYSDATE)
+	</entry>
+	<entry key="selectCustomerList">
+		SELECT * FROM CUSTOMER ORDER BY CUS_NO
+	</entry>
+	<entry key="selectByCusId">
+		SELECT * FROM CUSTOMER WHERE CUS_ID = ?
+	</entry>
+	<entry key="selectByNickName">
+		SELECT * FROM CUSTOMER WHERE NICKNAME LIKE ?
+	</entry>
+	<entry key="updateCustomer">
+		UPDATE CUSTOMER SET CUS_PWD = ?, NICKNAME = ? WHERE CUS_ID = ?
+	</entry>
+	<entry key="deleteCustomer">
+		DELETE FROM CUSTOMER WHERE CUS_ID = ?
+	</entry>
+	<entry key="CustomerLogin">
+		SELECT * FROM CUSTOMER WHERE CUS_ID = ? AND CUS_PWD = ?
+	</entry>
+	
+	<entry key="selectProductList">
+		SELECT * FROM PRODUCT ORDER BY PRO_NO
+	</entry>
+	<entry key="selectByProductName">
+		SELECT * FROM PRODUCT WHERE PRO_NAME LIKE ?
+	</entry>
+	<entry key="insertProduct">
+		INSERT INTO PRODUCT VALUES(SEQ_PRO_NO.NEXTVAL, ?, ?, ?, ?)
+	</entry>
+</properties>
