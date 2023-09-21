@@ -46,4 +46,50 @@ public class MiniDao {
 		
 		return result;
 	}
+	
+	public int delectProduct(Connection conn, int pro_no) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("delectProduct");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pro_no);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	public int updateProduct(Connection conn, Product p) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateProduct");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, p.getPro_name());
+			pstmt.setInt(2, p.getPro_price());
+			pstmt.setInt(3, p.getPro_amount());
+			pstmt.setString(4, p.getPro_description());
+			pstmt.setInt(5, p.getPro_no());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
 }

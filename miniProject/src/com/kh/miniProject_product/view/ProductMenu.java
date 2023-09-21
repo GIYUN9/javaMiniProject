@@ -1,5 +1,6 @@
 package com.kh.miniProject_product.view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.kh.miniProject_product.controller.ProductController;
@@ -148,51 +149,34 @@ public class ProductMenu {
 					pc.insertProduct(name, price, amount, des);
 					break;
 				case 2:
-					System.out.print("상품을 삭제하시겠습니까?(y/n) : ");
-					if(sc.next().charAt(0) == 'y') {
-						System.out.println(pc.printPro());
-						System.out.print("삭제할 상품의 인덱스 번호를 입력해주세요 : ");
-						pc.remove(sc.nextInt());
-						System.out.println("삭제되었습니다.");
-					} else{
-						System.out.println("===취소===");
-					}
+					System.out.println("===== 상품 삭제 =====");
+					System.out.print("삭제하실 상품의 상품 번호를 입력하세요 : ");
+					int pro_no_del = sc.nextInt();
+					sc.nextLine();
+					pc.delectProduct(pro_no_del);
 					break;
 				case 3:
-					System.out.println("===== 수정 =====");
-					System.out.println("1. 상품명");
-					System.out.println("2. 가격");
-					System.out.println("3. 수량");
-					System.out.println("4. 설명");
-					System.out.println("9. 수정하기 종료");
-					System.out.print("수정 하실 항목을 선택해주세요 : ");
-					int modNum = sc.nextInt();
+					System.out.println("=====상품 정보 수정 =====");
 					
-					switch(modNum) {
-						case 1:{
-							System.out.print("상품명 재입력 : ");
-							String modName = sc.next();
-							pc.modifyName(modName);
-							}break;
-						case 2:{
-							System.out.print("가격 재입력 : ");
-							int modPrice = sc.nextInt();
-							pc.modifyPrice(modPrice);
-							}break;
-						case 3:{
-							System.out.print("수량 재입력 : ");
-							int modAm = sc.nextInt();
-							pc.modifyAmount(modAm);
-							}break;
-						case 4:{
-							System.out.print("설명 재입력 : ");
-							sc.nextLine();
-							String modDes = sc.nextLine();
-							pc.modifyDescription(modDes);
-							}break;
-						case 9:
-							System.out.println("수정하기 종료");
-						}break;
+					System.out.print("변경할 상품의 상품번호 : ");
+					int pro_no = sc.nextInt();
+					sc.nextLine();
+					
+					System.out.print("변경할 이름 : ");
+					String pro_name = sc.nextLine();
+					
+					System.out.print("변경할 가격 : ");
+					int pro_price = sc.nextInt();
+					sc.nextLine();
+					
+					System.out.print("변경할 수량 : ");
+					int pro_amount = sc.nextInt();
+					sc.nextLine();
+					
+					System.out.print("변경할 설명 : ");
+					String pro_description = sc.nextLine();
+					
+					pc.updateProduct(pro_no ,pro_name, pro_price, pro_amount, pro_description);
 				case 4:
 					System.out.println("[로그아웃]");
 					return;
@@ -201,5 +185,32 @@ public class ProductMenu {
 					break;
 			}
 		}
+	}
+	
+	//----------응답화면---------
+	
+	public void displaySuccess(String message) {
+		System.out.println("\n서비스 요청 성공 : " + message);
+	}
+	
+	public void displayFail(String message) {
+		System.out.println("\n서비스 요청 실패 : " + message);
+	}
+	
+	public void displayNoData(String message) {
+		System.out.println("\n" + message);
+	}
+	
+	public void displayProductList(ArrayList<Product> list) {
+		System.out.println("\n조회된 데이터는 다음과 같습니다\n");
+		
+		for(Product p : list) {
+			System.out.println(p);
+		}
+	}
+	
+	public void displayProduct(Product p) {
+		System.out.println("\n조회된 데이터는 다음과 같습니다.");
+		System.out.println(p);
 	}
 }
