@@ -52,11 +52,6 @@ public class ProductController {
 		}
 	}
 	
-	public Product remove(int x) {
-		Product product = products.remove(x);
-		return product;
-	}
-	
 	public String printPro() {
 		String result = "인덱스번호\t상품명\t가격\t수량\t설명\n";
 		for (Product product : products) {
@@ -65,5 +60,27 @@ public class ProductController {
 		}
 		indexNum = 0;
 		return result;
+	}
+	
+	
+//	------------
+	public void selectList() {
+		ArrayList<Product> list = new ProductService().selectList();
+		
+		if(list.isEmpty()) {
+			new ProductMenu().displayNoData("상품 조회 결과가 없습니다.");
+		} else {
+			new ProductMenu().displayProductList(list);
+		}
+	}
+	
+	public void selectByProName(String pro_name) {
+		Product p = new ProductService().selectByProName(pro_name);
+		
+		if(p == null) {
+			new ProductMenu().displayNoData(pro_name + " 상품은 존재하지 않습니다.");
+		} else {
+			new ProductMenu().displayProduct(p);
+		}
 	}
 }

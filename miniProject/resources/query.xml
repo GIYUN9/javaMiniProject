@@ -2,10 +2,10 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<!-- ============================ 고객 메뉴 쿼리 ============================ -->
-	<entry key="selectProductList">
+	<entry key="selectList">
 		SELECT * FROM PRODUCT ORDER BY PRO_NO
 	</entry>
-	<entry key="selectByProductName">
+	<entry key="selectByProName">
 		SELECT * FROM PRODUCT WHERE PRO_NAME LIKE ?
 	</entry>
 	<entry key="insertCustomer">

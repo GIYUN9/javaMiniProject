@@ -1,6 +1,7 @@
 package com.kh.miniProject_product.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.miniProject_product.common.JDBCTemplate;
 import com.kh.miniProject_product.model.dao.MiniDao;
@@ -10,6 +11,7 @@ public class ProductService {
 	
 	public int insertProduct(Product p) {
 		
+//		------------------------관리자 메뉴-------------------
 		Connection conn = JDBCTemplate.getConnection();
 		int result = new MiniDao().insertProduct(conn, p);
 		
@@ -52,5 +54,21 @@ public class ProductService {
 		
 		return result;
 	}
+//	---------------------------고객 메뉴---------------------------
 
+	public ArrayList<Product> selectList(){
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Product> list = new MiniDao().selectList(conn);
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+	
+	public Product selectByProName(String pro_name) {
+		Connection conn = JDBCTemplate.getConnection();
+		Product p = new MiniDao().selectByProName(conn, pro_name);
+		JDBCTemplate.close(conn);
+		
+		return p;
+	}
 }

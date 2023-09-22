@@ -73,12 +73,7 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return pro_no + pro_name + pro_price + pro_amount + pro_description;
-	}
-	
-	public String pro_header() {
-		String header = "상품번호\t상품명\t가격\t수량\t상품설명";
-		return header;
+		return pro_no + "\t" + pro_name + "\t" + pro_price + "\t" + pro_amount + "\t" + pro_description;
 	}
 	
 }

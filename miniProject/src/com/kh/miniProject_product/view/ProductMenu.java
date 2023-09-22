@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.kh.miniProject_product.controller.ProductController;
+import com.kh.miniProject_product.model.vo.Customer;
 import com.kh.miniProject_product.model.vo.Product;
 
 public class ProductMenu {
@@ -22,6 +23,7 @@ public class ProductMenu {
 			System.out.println("9. 프로그램 종료");
 			System.out.print("번호를 입력해주세요 : ");
 			int mainNum = sc.nextInt();
+			sc.nextLine();
 			
 			switch(mainNum) {
 				case 1:
@@ -48,28 +50,17 @@ public class ProductMenu {
 			System.out.println("3. 상품 구매");
 			System.out.println("4. 뒤로가기(메인 메뉴)");
 			System.out.print("번호를 입력해주세요 : ");
-			int pmNum = sc.nextInt();
+			int cmNum = sc.nextInt();
+			sc.nextLine();
 			
-			switch(pmNum) {
+			switch(cmNum) {
 				case 1:
-					System.out.println(pc.printPro());
+					pc.selectList();
 					break;
 				case 2:
 					System.out.println("조회하실 상품명을 입력해주세요 : ");
-					String searchName = sc.next();
-					
-					boolean isExist = false;
-					for (Product product : pc.products) {
-						if (product.getPro_name().equals(searchName)) {
-							System.out.println(product.toString());
-							isExist = true;
-							break;
-						}
-					}
-					
-					if (!isExist) {
-						System.out.println("조회하신 상품이 없습니다.");
-					}
+					String searchName = sc.nextLine();
+					pc.selectByProName(searchName);
 					break;
 				case 3:
 					System.out.println(pc.printPro());
@@ -133,6 +124,7 @@ public class ProductMenu {
 			System.out.println("4. 로그아웃(메인으로)");
 			System.out.print("번호를 입력해주세요 : ");
 			adMNum = sc.nextInt();
+			sc.nextLine();
 			
 			switch(adMNum) {
 				case 1:
@@ -203,9 +195,19 @@ public class ProductMenu {
 	
 	public void displayProductList(ArrayList<Product> list) {
 		System.out.println("\n조회된 데이터는 다음과 같습니다\n");
+		System.out.println("상품번호\t상품명\t가격\t수량\t상품설명");
 		
 		for(Product p : list) {
 			System.out.println(p);
+		}
+	}
+	
+	public void displayCustomerList(ArrayList<Customer> list) {
+		System.out.println("\n조회된 데이터는 다음과 같습니다\n");
+		System.out.println("회원번호\t아이디\t비밀번호\t닉네임\t가입일자");
+		
+		for(Customer c : list) {
+			System.out.println(c);
 		}
 	}
 	
