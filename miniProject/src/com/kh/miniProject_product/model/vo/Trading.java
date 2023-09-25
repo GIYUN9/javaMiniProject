@@ -21,6 +21,12 @@ public class Trading {
 		this.tra_method = tra_method;
 		this.tra_date = tra_date;
 	}
+	
+	public Trading(int cus_no, int pro_no) {
+		super();
+		this.cus_no = cus_no;
+		this.pro_no = pro_no;
+	}
 
 	public int getTra_no() {
 		return tra_no;

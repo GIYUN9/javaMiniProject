@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.kh.miniProject_product.model.service.ProductService;
 import com.kh.miniProject_product.model.vo.Product;
+import com.kh.miniProject_product.model.vo.Trading;
 import com.kh.miniProject_product.view.ProductMenu;
 
 public class ProductController {
@@ -12,6 +13,9 @@ public class ProductController {
 	public int indexNum = 0;
 	public ArrayList<Product> products = new ArrayList<>();
 	
+	/**
+	 * 관리자의 상품 추가
+	 */
 	public void insertProduct(String pro_name, int pro_price, int pro_amount, String pro_description){
 		Product p = new Product(pro_name, pro_price, pro_amount, pro_description);
 	
@@ -23,7 +27,10 @@ public class ProductController {
 			new ProductMenu().displayFail("상품추가에 실패하였습니다.");
 		}
 	}
-
+	
+	/**
+	 * 관리자의 상품 수정
+	 */
 	public void updateProduct(int pro_no,String pro_name, int pro_price, int pro_amount, String pro_description) {
 		
 		Product p = new Product();
@@ -42,6 +49,9 @@ public class ProductController {
 		}
 	}
 	
+	/**
+	 * 관리자의 상품 삭제
+	 */
 	public void delectProduct(int pro_no) {
 		int result = new ProductService().delectProduct(pro_no);
 		
@@ -64,6 +74,9 @@ public class ProductController {
 	
 	
 //	------------
+	/**
+	 * 고객의 전체 상품 조회
+	 */
 	public void selectList() {
 		ArrayList<Product> list = new ProductService().selectList();
 		
@@ -74,13 +87,31 @@ public class ProductController {
 		}
 	}
 	
+	/**
+	 * 고객의 상품 검색 (상품명으로 검색)
+	 */
 	public void selectByProName(String pro_name) {
-		Product p = new ProductService().selectByProName(pro_name);
+		ArrayList<Product> list = new ProductService().selectByProName(pro_name);
 		
-		if(p == null) {
+		if(list.isEmpty()) {
 			new ProductMenu().displayNoData(pro_name + " 상품은 존재하지 않습니다.");
 		} else {
-			new ProductMenu().displayProduct(p);
+			new ProductMenu().displayProductList(list);
+		}
+	}
+	
+	/**
+	 * 고객의 상품 구매
+	 */
+	public void updateBuyTrading(int cus_no, int pro_no) {
+		Trading t = new Trading(cus_no, pro_no);
+		
+		int result = new ProductService().insertTrading(t);
+		
+		if (result > 0) {
+			new ProductMenu().displaySuccess("상품 구매 완료");
+		} else {
+			new ProductMenu().displayFail("상품 구매 실패");
 		}
 	}
 }

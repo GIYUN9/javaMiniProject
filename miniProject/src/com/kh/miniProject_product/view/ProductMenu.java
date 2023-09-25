@@ -64,21 +64,16 @@ public class ProductMenu {
 					break;
 				case 3:
 					System.out.println(pc.printPro());
+					System.out.println("본인(구매자)의 회원번호를 입력해주세요 : ");
+					int cus_no = sc.nextInt();
+					sc.nextLine();
 					
-					System.out.println("구매하실 상품의 인덱스를 입력해주세요 : ");
-					int buyIndex = sc.nextInt();
+					System.out.println("구매하실 상품의 상품번호를 입력해주세요 : ");
+					int pro_no = sc.nextInt();
+					sc.nextLine();
 					
-					Product product = pc.products.get(buyIndex);
+					pc.updateBuyTrading(cus_no, pro_no);
 					
-					System.out.println("구매하실 수량을 입력해주세요 : ");
-					int buyAmount = sc.nextInt();
-					
-					if (product.getPro_amount() >= buyAmount) {
-						product.setPro_amount(product.getPro_amount() - buyAmount);
-						System.out.println("구매되었습니다.");
-					} else {
-						System.out.println("재고가 부족합니다.");
-					}
 					break;
 				case 4:
 					System.out.println("[뒤로가기] 메인 메뉴로 이동합니다.");

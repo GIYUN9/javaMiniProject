@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import com.kh.miniProject_product.common.JDBCTemplate;
 import com.kh.miniProject_product.model.vo.Product;
+import com.kh.miniProject_product.model.vo.Trading;
 
 public class MiniDao {
 	
@@ -38,6 +39,28 @@ public class MiniDao {
 			pstmt.setInt(2, p.getPro_price());
 			pstmt.setInt(3, p.getPro_amount());
 			pstmt.setString(4, p.getPro_description());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int insertTrading(Connection conn, Trading t) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertTrading");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, t.getCus_no());
+			pstmt.setInt(2, t.getPro_no());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -128,8 +151,8 @@ public class MiniDao {
 		return list;
 	}
 	
-	public Product selectByProName(Connection conn, String pro_name) {
-		Product p = null;
+	public ArrayList<Product> selectByProName(Connection conn, String pro_name) {
+		ArrayList<Product> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -137,16 +160,18 @@ public class MiniDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, pro_name);
+			pstmt.setString(1, "%"+pro_name+"%");
 			rset = pstmt.executeQuery();
 			
-			if (rset.next()) {
-				p = new Product();
+			while (rset.next()) {
+				Product p = new Product();
 				p.setPro_no(rset.getInt("PRO_NO"));
 				p.setPro_name(rset.getString("PRO_NAME"));
 				p.setPro_price(rset.getInt("PRO_PRICE"));
 				p.setPro_amount(rset.getInt("PRO_AMOUNT"));
 				p.setPro_description(rset.getString("PRO_DESCRIPTION"));
+				
+				list.add(p);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -155,6 +180,6 @@ public class MiniDao {
 			JDBCTemplate.close(pstmt);
 		}
 		
-		return p;
+		return list;
 	}
 }

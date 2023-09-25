@@ -29,6 +29,9 @@
 	<entry key="CustomerLogin">
 		SELECT * FROM CUSTOMER WHERE CUS_ID = ? AND CUS_PWD = ?
 	</entry>
+	<entry key="insertTrading">
+		INSERT INTO TRADING VALUES(SEQ_TRA_NO.NEXTVAL, ?, ?, '구매', SYSDATE)
+	</entry>
 	
 	<!-- ============================ 관리자 메뉴 쿼리 ============================ -->
 	<entry key="insertProduct">

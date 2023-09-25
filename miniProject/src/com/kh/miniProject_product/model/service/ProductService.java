@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.kh.miniProject_product.common.JDBCTemplate;
 import com.kh.miniProject_product.model.dao.MiniDao;
 import com.kh.miniProject_product.model.vo.Product;
+import com.kh.miniProject_product.model.vo.Trading;
 
 public class ProductService {
 	
@@ -64,11 +65,26 @@ public class ProductService {
 		return list;
 	}
 	
-	public Product selectByProName(String pro_name) {
+	public ArrayList<Product> selectByProName(String pro_name) {
 		Connection conn = JDBCTemplate.getConnection();
-		Product p = new MiniDao().selectByProName(conn, pro_name);
+		ArrayList<Product> list = new MiniDao().selectByProName(conn, pro_name);
 		JDBCTemplate.close(conn);
 		
-		return p;
+		return list;
+	}
+	
+	public int insertTrading(Trading t){
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MiniDao().insertTrading(conn, t);
+		
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
 	}
 }
