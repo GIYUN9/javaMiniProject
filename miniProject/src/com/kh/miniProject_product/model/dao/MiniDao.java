@@ -182,4 +182,35 @@ public class MiniDao {
 		
 		return list;
 	}
+	
+	public ArrayList<Trading> tradingList(Connection conn, int cus_no){
+		ArrayList<Trading> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("tradingList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cus_no);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Trading t = new Trading();
+				t.setTra_no(rset.getInt("TRA_NO"));
+				t.setCus_no(rset.getInt("CUS_NO"));
+				t.setPro_no(rset.getInt("PRO_NO"));
+				t.setTra_method(rset.getString("TRA_METHOD"));
+				t.setTra_date(rset.getDate("TRA_DATE"));
+				
+				list.add(t);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+	}
 }

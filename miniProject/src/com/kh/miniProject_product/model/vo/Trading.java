@@ -70,7 +70,7 @@ public class Trading {
 
 	@Override
 	public String toString() {
-		return tra_no + cus_no + pro_no + tra_method + tra_date;
+		return tra_no + "\t" + cus_no + "\t" + pro_no + "\t" + tra_method + "\t" + tra_date;
 	}
 	
 	public String tra_header() {

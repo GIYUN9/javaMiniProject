@@ -114,4 +114,17 @@ public class ProductController {
 			new ProductMenu().displayFail("상품 구매 실패");
 		}
 	}
+	
+	/**
+	 * 고객의 거래이력 조회
+	 */
+	public void selectTrading(int cus_no) {
+		ArrayList<Trading> list = new ProductService().tradingList(cus_no);
+		
+		if(list.isEmpty()) {
+			new ProductMenu().displayNoData("회원님의 거래내역이 없습니다.");
+		} else {
+			new ProductMenu().displayTradingList(list);
+		}
+	}
 }

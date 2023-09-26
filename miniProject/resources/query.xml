@@ -32,6 +32,9 @@
 	<entry key="insertTrading">
 		INSERT INTO TRADING VALUES(SEQ_TRA_NO.NEXTVAL, ?, ?, '구매', SYSDATE)
 	</entry>
+	<entry key="tradingList">
+		SELECT * FROM TRADING WHERE CUS_NO = ?
+	</entry>
 	
 	<!-- ============================ 관리자 메뉴 쿼리 ============================ -->
 	<entry key="insertProduct">

@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.kh.miniProject_product.controller.ProductController;
 import com.kh.miniProject_product.model.vo.Customer;
 import com.kh.miniProject_product.model.vo.Product;
+import com.kh.miniProject_product.model.vo.Trading;
 
 public class ProductMenu {
 	ProductController pc = new ProductController();
@@ -48,7 +49,8 @@ public class ProductMenu {
 			System.out.println("1. 전체 상품 목록 조회");
 			System.out.println("2. 상품 조회");
 			System.out.println("3. 상품 구매");
-			System.out.println("4. 뒤로가기(메인 메뉴)");
+			System.out.println("4. 거래 내역 조회");			
+			System.out.println("5. 뒤로가기(메인 메뉴)");
 			System.out.print("번호를 입력해주세요 : ");
 			int cmNum = sc.nextInt();
 			sc.nextLine();
@@ -63,19 +65,24 @@ public class ProductMenu {
 					pc.selectByProName(searchName);
 					break;
 				case 3:
-					System.out.println(pc.printPro());
-					System.out.println("본인(구매자)의 회원번호를 입력해주세요 : ");
+					pc.selectList();
+					System.out.print("본인(구매자)의 회원번호를 입력해주세요 : ");
 					int cus_no = sc.nextInt();
 					sc.nextLine();
 					
-					System.out.println("구매하실 상품의 상품번호를 입력해주세요 : ");
+					System.out.print("구매하실 상품의 상품번호를 입력해주세요.\n(수량고정 : 1개) : ");
 					int pro_no = sc.nextInt();
 					sc.nextLine();
 					
 					pc.updateBuyTrading(cus_no, pro_no);
-					
 					break;
 				case 4:
+					System.out.print("내역조회를 위해 고객(본인)번호를 입력해주세요 : ");
+					int cus_noSelect = sc.nextInt();
+					sc.nextLine();
+					pc.selectTrading(cus_noSelect);
+					break;
+				case 5:
 					System.out.println("[뒤로가기] 메인 메뉴로 이동합니다.");
 					return;
 				default:
@@ -203,6 +210,15 @@ public class ProductMenu {
 		
 		for(Customer c : list) {
 			System.out.println(c);
+		}
+	}
+	
+	public void displayTradingList(ArrayList<Trading> list) {
+		System.out.println("\n조회된 데이터는 다음과 같습니다\n");
+		System.out.println("거래번호\t고객번호\t상품번호\t형식\t처리일자");
+		
+		for(Trading t : list) {
+			System.out.println(t);
 		}
 	}
 	

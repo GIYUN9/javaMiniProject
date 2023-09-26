@@ -65,6 +65,14 @@ public class ProductService {
 		return list;
 	}
 	
+	public ArrayList<Trading> tradingList(int cus_no) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Trading> list = new MiniDao().tradingList(conn, cus_no);
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+	
 	public ArrayList<Product> selectByProName(String pro_name) {
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Product> list = new MiniDao().selectByProName(conn, pro_name);
