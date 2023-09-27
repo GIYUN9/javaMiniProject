@@ -9,10 +9,49 @@ import com.kh.miniProject_product.model.vo.Product;
 import com.kh.miniProject_product.model.vo.Trading;
 
 public class ProductService {
-	
-	public int insertProduct(Product p) {
+//	---------------------------고객
+	public ArrayList<Product> selectList(){
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Product> list = new MiniDao().selectList(conn);
+		JDBCTemplate.close(conn);
 		
-//		------------------------관리자 메뉴-------------------
+		return list;
+	}
+	
+	public ArrayList<Trading> tradingList(int cus_no) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Trading> list = new MiniDao().tradingList(conn, cus_no);
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+	
+	public ArrayList<Product> selectByProName(String pro_name) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Product> list = new MiniDao().selectByProName(conn, pro_name);
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+	
+	public int insertTrading(Trading t){
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MiniDao().insertTrading(conn, t);
+		
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+	
+//	------------------------관리자
+	public int insertProduct(Product p) {
+
 		Connection conn = JDBCTemplate.getConnection();
 		int result = new MiniDao().insertProduct(conn, p);
 		
@@ -51,46 +90,6 @@ public class ProductService {
 		} else {
 			JDBCTemplate.rollback(conn);
 		}
-		JDBCTemplate.close(conn);
-		
-		return result;
-	}
-//	---------------------------고객 메뉴---------------------------
-
-	public ArrayList<Product> selectList(){
-		Connection conn = JDBCTemplate.getConnection();
-		ArrayList<Product> list = new MiniDao().selectList(conn);
-		JDBCTemplate.close(conn);
-		
-		return list;
-	}
-	
-	public ArrayList<Trading> tradingList(int cus_no) {
-		Connection conn = JDBCTemplate.getConnection();
-		ArrayList<Trading> list = new MiniDao().tradingList(conn, cus_no);
-		JDBCTemplate.close(conn);
-		
-		return list;
-	}
-	
-	public ArrayList<Product> selectByProName(String pro_name) {
-		Connection conn = JDBCTemplate.getConnection();
-		ArrayList<Product> list = new MiniDao().selectByProName(conn, pro_name);
-		JDBCTemplate.close(conn);
-		
-		return list;
-	}
-	
-	public int insertTrading(Trading t){
-		Connection conn = JDBCTemplate.getConnection();
-		int result = new MiniDao().insertTrading(conn, t);
-		
-		if (result > 0) {
-			JDBCTemplate.commit(conn);
-		} else {
-			JDBCTemplate.rollback(conn);
-		}
-		
 		JDBCTemplate.close(conn);
 		
 		return result;

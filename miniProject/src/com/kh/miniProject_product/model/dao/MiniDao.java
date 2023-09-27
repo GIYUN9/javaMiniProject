@@ -23,103 +23,8 @@ public class MiniDao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public int insertProduct(Connection conn, Product p) {
-		
-		int result = 0;
-		
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertProduct");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, p.getPro_name());
-			pstmt.setInt(2, p.getPro_price());
-			pstmt.setInt(3, p.getPro_amount());
-			pstmt.setString(4, p.getPro_description());
-			
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(pstmt);
-		}
-		
-		return result;
-	}
-	
-	public int insertTrading(Connection conn, Trading t) {
-		int result = 0;
-		
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertTrading");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, t.getCus_no());
-			pstmt.setInt(2, t.getPro_no());
-			
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(pstmt);
-		}
-		
-		return result;
-	}
-	
-	public int delectProduct(Connection conn, int pro_no) {
-		int result = 0;
-		
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("delectProduct");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, pro_no);
-			
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(pstmt);
-		}
-		
-		return result;
-		
-	}
-	
-	public int updateProduct(Connection conn, Product p) {
-		int result = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("updateProduct");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, p.getPro_name());
-			pstmt.setInt(2, p.getPro_price());
-			pstmt.setInt(3, p.getPro_amount());
-			pstmt.setString(4, p.getPro_description());
-			pstmt.setInt(5, p.getPro_no());
-			
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(pstmt);
-		}
-		
-		return result;
-	}
-	
-	
-	
+	}	
+//===========================고객	
 	public ArrayList<Product> selectList(Connection conn){
 		ArrayList<Product> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -212,5 +117,100 @@ public class MiniDao {
 		}
 		
 		return list;
+	}
+	
+	public int insertTrading(Connection conn, Trading t) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertTrading");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, t.getCus_no());
+			pstmt.setInt(2, t.getPro_no());
+			pstmt.setInt(3, t.gettra_amount());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+	
+//=============================관리자
+	public int insertProduct(Connection conn, Product p) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertProduct");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, p.getPro_name());
+			pstmt.setInt(2, p.getPro_price());
+			pstmt.setInt(3, p.getPro_amount());
+			pstmt.setString(4, p.getPro_description());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int delectProduct(Connection conn, int pro_no) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("delectProduct");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pro_no);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	public int updateProduct(Connection conn, Product p) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateProduct");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, p.getPro_name());
+			pstmt.setInt(2, p.getPro_price());
+			pstmt.setInt(3, p.getPro_amount());
+			pstmt.setString(4, p.getPro_description());
+			pstmt.setInt(5, p.getPro_no());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
 	}
 }

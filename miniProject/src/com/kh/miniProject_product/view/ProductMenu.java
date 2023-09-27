@@ -70,11 +70,15 @@ public class ProductMenu {
 					int cus_no = sc.nextInt();
 					sc.nextLine();
 					
-					System.out.print("구매하실 상품의 상품번호를 입력해주세요.\n(수량고정 : 1개) : ");
+					System.out.print("구매하실 상품의 상품번호를 입력해주세요 : ");
 					int pro_no = sc.nextInt();
 					sc.nextLine();
 					
-					pc.updateBuyTrading(cus_no, pro_no);
+					System.out.print("구매하실 상품의 수량을 입력해주세요 : ");
+					int tra_amount = sc.nextInt();
+					sc.nextLine();
+					
+					pc.updateBuyTrading(cus_no, pro_no, tra_amount);
 					break;
 				case 4:
 					System.out.print("내역조회를 위해 고객(본인)번호를 입력해주세요 : ");
@@ -215,7 +219,7 @@ public class ProductMenu {
 	
 	public void displayTradingList(ArrayList<Trading> list) {
 		System.out.println("\n조회된 데이터는 다음과 같습니다\n");
-		System.out.println("거래번호\t고객번호\t상품번호\t형식\t처리일자");
+		System.out.println("거래번호\t고객번호\t상품번호\t수량\t형식\t처리일자");
 		
 		for(Trading t : list) {
 			System.out.println(t);
