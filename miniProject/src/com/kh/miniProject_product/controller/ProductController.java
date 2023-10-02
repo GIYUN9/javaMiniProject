@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.kh.miniProject_product.model.service.ProductService;
+import com.kh.miniProject_product.model.vo.Customer;
 import com.kh.miniProject_product.model.vo.Product;
 import com.kh.miniProject_product.model.vo.Trading;
 import com.kh.miniProject_product.view.ProductMenu;
@@ -79,6 +80,18 @@ public class ProductController {
 		}
 	}
 	
+	public void insertCustomer(String newId, String newPwd, String newNick) {
+		Customer c = new Customer(newId, newPwd, newNick);
+		
+		int result = new ProductService().insertCustomer(c);
+		
+		if(result > 0) {
+			new ProductMenu().displaySuccess("회원가입이 완료되었습니다.");
+		} else {
+			new ProductMenu().displayFail("회원가입에 실패하였습니다.");
+		}
+	}
+	
 //	================================관리자
 	
 	/**
@@ -127,6 +140,26 @@ public class ProductController {
 			new ProductMenu().displaySuccess("상품번호 : "+ pro_no +"번의 삭제를 성공하였습니다.");
 		} else {
 			new ProductMenu().displayFail("상품삭제에 실패하였습니다.");
+		}
+	}
+	
+	public void selectCustomerList() {
+		ArrayList<Customer> list = new ProductService().selectCustomerList();
+		
+		if(list.isEmpty()) {
+			new ProductMenu().displayNoData("상품 조회 결과가 없습니다.");
+		} else {
+			new ProductMenu().displayCustomerList(list);
+		}
+	}
+	
+	public void selectTradingList() {
+		ArrayList<Trading> list = new ProductService().selectTradingList();
+		
+		if(list.isEmpty()) {
+			new ProductMenu().displayNoData("거래이력이 없습니다.");
+		} else {
+			new ProductMenu().displayTradingList(list);
 		}
 	}
 }

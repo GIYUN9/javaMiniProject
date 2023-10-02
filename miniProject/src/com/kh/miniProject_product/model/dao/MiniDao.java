@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.miniProject_product.common.JDBCTemplate;
+import com.kh.miniProject_product.model.vo.Customer;
 import com.kh.miniProject_product.model.vo.Product;
 import com.kh.miniProject_product.model.vo.Trading;
 
@@ -104,6 +105,7 @@ public class MiniDao {
 				t.setTra_no(rset.getInt("TRA_NO"));
 				t.setCus_no(rset.getInt("CUS_NO"));
 				t.setPro_no(rset.getInt("PRO_NO"));
+				t.settra_amount(rset.getInt("TRA_AMOUNT"));
 				t.setTra_method(rset.getString("TRA_METHOD"));
 				t.setTra_date(rset.getDate("TRA_DATE"));
 				
@@ -131,6 +133,28 @@ public class MiniDao {
 			pstmt.setInt(1, t.getCus_no());
 			pstmt.setInt(2, t.getPro_no());
 			pstmt.setInt(3, t.gettra_amount());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int insertCustomer(Connection conn, Customer c) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertCustomer");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, c.getCus_id());
+			pstmt.setString(2, c.getCus_pwd());
+			pstmt.setString(3, c.getNickName());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -212,5 +236,68 @@ public class MiniDao {
 		}
 		
 		return result;
+	}
+	
+	public ArrayList<Customer> selectCustomerList(Connection conn){
+		ArrayList<Customer> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCustomerList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Customer c = new Customer();
+				c.setCus_no(rset.getInt("CUS_NO"));
+				c.setCus_id(rset.getString("CUS_ID"));
+				c.setCus_pwd(rset.getString("CUS_PWD"));
+				c.setNickName(rset.getString("NICKNAME"));
+				c.setEnrolldate(rset.getDate("ENROLLDATE"));
+				
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<Trading> selectTradingList(Connection conn){
+		ArrayList<Trading> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectTradingList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Trading t = new Trading();
+				t.setTra_no(rset.getInt("TRA_NO"));
+				t.setCus_no(rset.getInt("CUS_NO"));
+				t.setPro_no(rset.getInt("PRO_NO"));
+				t.settra_amount(rset.getInt("TRA_AMOUNT"));
+				t.setTra_method(rset.getString("TRA_METHOD"));
+				t.setTra_date(rset.getDate("TRA_DATE"));
+				
+				list.add(t);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
 	}
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.kh.miniProject_product.common.JDBCTemplate;
 import com.kh.miniProject_product.model.dao.MiniDao;
+import com.kh.miniProject_product.model.vo.Customer;
 import com.kh.miniProject_product.model.vo.Product;
 import com.kh.miniProject_product.model.vo.Trading;
 
@@ -37,6 +38,21 @@ public class ProductService {
 	public int insertTrading(Trading t){
 		Connection conn = JDBCTemplate.getConnection();
 		int result = new MiniDao().insertTrading(conn, t);
+		
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+	
+	public int insertCustomer(Customer c) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MiniDao().insertCustomer(conn, c);
 		
 		if (result > 0) {
 			JDBCTemplate.commit(conn);
@@ -93,5 +109,21 @@ public class ProductService {
 		JDBCTemplate.close(conn);
 		
 		return result;
+	}
+	
+	public ArrayList<Customer> selectCustomerList(){
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Customer> list = new MiniDao().selectCustomerList(conn);
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+	
+	public ArrayList<Trading> selectTradingList(){
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Trading> list = new MiniDao().selectTradingList(conn);
+		JDBCTemplate.close(conn);
+		
+		return list;
 	}
 }

@@ -12,6 +12,13 @@ public class Customer {
 	public Customer() {
 		
 	}
+	
+	public Customer(String newId, String newPwd, String newNick) {
+		super();
+		this.cus_id = newId;
+		this.cus_pwd = newPwd;
+		this.nickName = newNick;
+	}
 
 	public Customer(int cus_no, String cus_id, String cus_pwd, String nickName, Date enrolldate) {
 		super();
@@ -64,13 +71,9 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return cus_no + cus_id + cus_pwd + nickName + enrolldate;
+		return cus_no + "\t" + cus_id + "\t" + cus_pwd + "\t" + nickName + "\t" + enrolldate;
 	}
 	
-	public String cus_header() {
-		String header = "고객번호\t고객ID\t고객PWD\t닉네임\t가입일자";
-		return header;
-	}
 	
 	
 	

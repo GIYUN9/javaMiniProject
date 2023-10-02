@@ -49,8 +49,9 @@ public class ProductMenu {
 			System.out.println("1. 전체 상품 목록 조회");
 			System.out.println("2. 상품 조회");
 			System.out.println("3. 상품 구매");
-			System.out.println("4. 거래 내역 조회");			
-			System.out.println("5. 뒤로가기(메인 메뉴)");
+			System.out.println("4. 거래 내역 조회");	
+			System.out.println("5. 회원가입");	
+			System.out.println("6. 뒤로가기(메인 메뉴)");
 			System.out.print("번호를 입력해주세요 : ");
 			int cmNum = sc.nextInt();
 			sc.nextLine();
@@ -80,13 +81,26 @@ public class ProductMenu {
 					
 					pc.updateBuyTrading(cus_no, pro_no, tra_amount);
 					break;
+				case 5:
+					System.out.println("===== 회원가입 =====");
+					System.out.print("아이디(공백없이 영어와 숫자만 사용) : ");
+					String newId = sc.nextLine();
+					
+					System.out.print("비밀번호(공백없이 영어와 숫자만 사용) : ");
+					String newPwd = sc.nextLine();
+					
+					System.out.print("닉네임 : ");
+					String newNick = sc.nextLine();
+					
+					pc.insertCustomer(newId, newPwd, newNick);
+					break;
 				case 4:
 					System.out.print("내역조회를 위해 고객(본인)번호를 입력해주세요 : ");
 					int cus_noSelect = sc.nextInt();
 					sc.nextLine();
 					pc.selectTrading(cus_noSelect);
 					break;
-				case 5:
+				case 6:
 					System.out.println("[뒤로가기] 메인 메뉴로 이동합니다.");
 					return;
 				default:
@@ -127,7 +141,9 @@ public class ProductMenu {
 			System.out.println("1. 상품 추가");
 			System.out.println("2. 상품 삭제");
 			System.out.println("3. 상품 수정");
-			System.out.println("4. 로그아웃(메인으로)");
+			System.out.println("4. 고객 정보 조회");
+			System.out.println("5. 고객 거래 이력 전체 조회");
+			System.out.println("6. 로그아웃(메인으로)");
 			System.out.print("번호를 입력해주세요 : ");
 			adMNum = sc.nextInt();
 			sc.nextLine();
@@ -175,7 +191,14 @@ public class ProductMenu {
 					String pro_description = sc.nextLine();
 					
 					pc.updateProduct(pro_no ,pro_name, pro_price, pro_amount, pro_description);
+					break;
 				case 4:
+					pc.selectCustomerList();
+					break;
+				case 5:
+					pc.selectTradingList();
+					break;
+				case 6:
 					System.out.println("[로그아웃]");
 					return;
 				default:
