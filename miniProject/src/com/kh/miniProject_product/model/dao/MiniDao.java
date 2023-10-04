@@ -165,8 +165,93 @@ public class MiniDao {
 		
 		return result;
 	}
+	public int customerLoginMenu(Connection conn, String id, String pwd) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("customerLoginMenu");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pwd);
+			
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = 1;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+	
+	public ArrayList<Customer> selectCustomerInfo(Connection conn, String id, String pwd){
+		ArrayList<Customer> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCustomerInfo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pwd);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Customer c = new Customer();
+				c.setCus_no(rset.getInt("CUS_NO"));
+				c.setCus_id(rset.getString("CUS_ID"));
+				c.setCus_pwd(rset.getString("CUS_PWD"));
+				c.setNickName(rset.getString("NICKNAME"));
+				c.setEnrolldate(rset.getDate("ENROLLDATE"));
+				
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+	}
 	
 //=============================관리자
+	
+	public int adminLoginMenu(Connection conn, String id, String pwd) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminLoginMenu");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pwd);
+			
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = 1;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+	
 	public int insertProduct(Connection conn, Product p) {
 		
 		int result = 0;

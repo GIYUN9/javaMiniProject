@@ -80,6 +80,9 @@ public class ProductController {
 		}
 	}
 	
+	/**
+	 * 고객의 회원가입
+	 */
 	public void insertCustomer(String newId, String newPwd, String newNick) {
 		Customer c = new Customer(newId, newPwd, newNick);
 		
@@ -92,7 +95,41 @@ public class ProductController {
 		}
 	}
 	
+	public int customerLoginMenu(String id, String pwd) {
+		int result = new ProductService().adminLoginMenu(id, pwd);
+		
+		if(result > 0) {
+			new ProductMenu().displaySuccess("[로그인 성공]");
+		} else {
+			new ProductMenu().displayFail("[로그인 실패]");
+		}
+		
+		return result;
+	}
+	
+	public void selectCustomerInfo(String id, String pwd) {
+		ArrayList<Customer> list = new ProductService().selectCustomerInfo(id, pwd);
+		
+		if(list.isEmpty()) {
+			new ProductMenu().displayNoData("에러");
+		} else {
+			new ProductMenu().displayCustomerList(list);
+		}
+	}
+	
 //	================================관리자
+	
+	public int adminLoginMenu(String id, String pwd) {
+		int result = new ProductService().adminLoginMenu(id, pwd);
+		
+		if(result > 0) {
+			new ProductMenu().displaySuccess("[로그인 성공]");
+		} else {
+			new ProductMenu().displayFail("[로그인 실패]");
+		}
+		
+		return result;
+	}
 	
 	/**
 	 * 관리자의 상품 추가
@@ -143,6 +180,9 @@ public class ProductController {
 		}
 	}
 	
+	/**
+	 * 관리자의 전체 고객 정보 조회
+	 */
 	public void selectCustomerList() {
 		ArrayList<Customer> list = new ProductService().selectCustomerList();
 		
@@ -153,6 +193,9 @@ public class ProductController {
 		}
 	}
 	
+	/**
+	 * 관리자의 전체거래이력 조회
+	 */
 	public void selectTradingList() {
 		ArrayList<Trading> list = new ProductService().selectTradingList();
 		

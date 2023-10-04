@@ -64,8 +64,32 @@ public class ProductService {
 		
 		return result;
 	}
+	public int customerLoginMenu(String id, String pwd) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MiniDao().customerLoginMenu(conn, id, pwd);
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+	
+	public ArrayList<Customer> selectCustomerInfo(String id, String pwd) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Customer> list = new MiniDao().selectCustomerInfo(conn, id, pwd);
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
 	
 //	------------------------관리자
+	
+	public int adminLoginMenu(String id, String pwd) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MiniDao().adminLoginMenu(conn, id, pwd);
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+	
 	public int insertProduct(Product p) {
 
 		Connection conn = JDBCTemplate.getConnection();

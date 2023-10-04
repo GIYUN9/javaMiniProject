@@ -35,8 +35,17 @@
 	<entry key="tradingList">
 		SELECT * FROM TRADING WHERE CUS_NO = ?
 	</entry>
-	
+	customerLoginMenu
+	<entry key="customerLoginMenu">
+		SELECT * FROM CUSTOMER WHERE CUS_ID = ? AND CUS_PWD = ?
+	</entry>
+	<entry key="selectCustomerInfo">
+		SELECT * FROM CUSTOMER WHERE CUS_ID = ? AND CUS_PWD = ?
+	</entry>
 	<!-- ============================ 관리자 메뉴 쿼리 ============================ -->
+	<entry key="adminLoginMenu">
+		SELECT * FROM CUSTOMER WHERE CUS_ID = ? AND CUS_PWD = ?
+	</entry>
 	<entry key="insertProduct">
 		INSERT INTO PRODUCT VALUES(SEQ_PRO_NO.NEXTVAL, ?, ?, ?, ?)
 	</entry>

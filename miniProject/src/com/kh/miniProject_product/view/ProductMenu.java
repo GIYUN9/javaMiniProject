@@ -11,8 +11,6 @@ import com.kh.miniProject_product.model.vo.Trading;
 public class ProductMenu {
 	ProductController pc = new ProductController();
 	Scanner sc = new Scanner(System.in);
-	private static final String ADMIN_ID = "2"; 
-	private static final String ADMIN_PSW = "2"; 
 	String adLoginId;
 	String adLoginPsw;
 	
@@ -22,13 +20,14 @@ public class ProductMenu {
 			System.out.println("1. 고객 메뉴");
 			System.out.println("2. 관리자 메뉴");
 			System.out.println("9. 프로그램 종료");
+			System.out.println("10. 고객 회원가입");
 			System.out.print("번호를 입력해주세요 : ");
 			int mainNum = sc.nextInt();
 			sc.nextLine();
 			
 			switch(mainNum) {
 				case 1:
-					CustomerMenu();
+					customerLoginMenu();
 					break;
 				case 2:
 					adminLoginMenu();
@@ -36,6 +35,19 @@ public class ProductMenu {
 				case 9:
 					System.out.println("[프로그램을 종료합니다]");
 					return;
+				case 10:
+					System.out.println("===== 회원가입 =====");
+					System.out.print("아이디(공백없이 영어와 숫자만 사용) : ");
+					String newId = sc.nextLine();
+					
+					System.out.print("비밀번호(공백없이 영어와 숫자만 사용) : ");
+					String newPwd = sc.nextLine();
+					
+					System.out.print("닉네임 : ");
+					String newNick = sc.nextLine();
+					
+					pc.insertCustomer(newId, newPwd, newNick);
+					break;
 				default:
 					System.out.println("잘못된 번호입니다. 다시입력해주세요.");
 					break;
@@ -49,8 +61,8 @@ public class ProductMenu {
 			System.out.println("1. 전체 상품 목록 조회");
 			System.out.println("2. 상품 조회");
 			System.out.println("3. 상품 구매");
-			System.out.println("4. 거래 내역 조회");	
-			System.out.println("5. 회원가입");	
+			System.out.println("4. 거래 내역 조회");
+			System.out.println("5. 회원정보 조회");
 			System.out.println("6. 뒤로가기(메인 메뉴)");
 			System.out.print("번호를 입력해주세요 : ");
 			int cmNum = sc.nextInt();
@@ -67,7 +79,7 @@ public class ProductMenu {
 					break;
 				case 3:
 					pc.selectList();
-					System.out.print("본인(구매자)의 회원번호를 입력해주세요 : ");
+					System.out.print("회원번호는 고객메뉴의 [5.회원정보 조회]에서 확인가능합니다\n고객님의 회원번호를 입력해주세요 : ");
 					int cus_no = sc.nextInt();
 					sc.nextLine();
 					
@@ -81,24 +93,20 @@ public class ProductMenu {
 					
 					pc.updateBuyTrading(cus_no, pro_no, tra_amount);
 					break;
-				case 5:
-					System.out.println("===== 회원가입 =====");
-					System.out.print("아이디(공백없이 영어와 숫자만 사용) : ");
-					String newId = sc.nextLine();
-					
-					System.out.print("비밀번호(공백없이 영어와 숫자만 사용) : ");
-					String newPwd = sc.nextLine();
-					
-					System.out.print("닉네임 : ");
-					String newNick = sc.nextLine();
-					
-					pc.insertCustomer(newId, newPwd, newNick);
-					break;
 				case 4:
 					System.out.print("내역조회를 위해 고객(본인)번호를 입력해주세요 : ");
 					int cus_noSelect = sc.nextInt();
 					sc.nextLine();
 					pc.selectTrading(cus_noSelect);
+					break;
+				case 5:
+					System.out.println("회원정보 조회를 위해 다시 로그인 해주세요.");
+					System.out.print("아이디 : ");
+					String id = sc.nextLine();
+					
+					System.out.print("비밀번호 : ");
+					String pwd = sc.nextLine();
+					pc.selectCustomerInfo(id, pwd);
 					break;
 				case 6:
 					System.out.println("[뒤로가기] 메인 메뉴로 이동합니다.");
@@ -109,28 +117,43 @@ public class ProductMenu {
 		}
 	}
 	
+	public void customerLoginMenu() {
+		while(true) {
+			System.out.println("====== 고객 로그인 ======");
+			System.out.print("아이디 : ");
+			String id = sc.nextLine();
+			
+			System.out.print("비밀번호 : ");
+			String pwd = sc.nextLine();
+			int result = pc.customerLoginMenu(id, pwd);
+			
+			if(result > 0) {
+				CustomerMenu();
+				break;
+			} else {
+				System.out.println("다시 입력해주세요.");
+			}
+		}
+	}
+	
 	public void adminLoginMenu() {
 		while(true) {
 			System.out.println("====== 관리자 로그인 ======");
 			System.out.print("아이디 : ");
-			adLoginId = sc.next();
-			sc.nextLine();
-			System.out.print("비밀번호 : ");
-			adLoginPsw = sc.next();
-			sc.nextLine();
+			String id = sc.nextLine();
 			
-			if(adLoginId.equals(ADMIN_ID)) {
-				if(adLoginPsw.equals(ADMIN_PSW)) {
-					System.out.println("[로그인 성공]");
-					adminMenu();
-					return;
-				}else {
-					System.out.println("아이디 또는 비빌번호가 잘못되었습니다.");
-				}
-			}else {
-				System.out.println("존재하지 않는 아이디 또는 비빌번호가 잘못되었습니다.");
+			System.out.print("비밀번호 : ");
+			String pwd = sc.nextLine();
+			int result = pc.adminLoginMenu(id, pwd);
+			
+			if(result > 0) {
+				adminMenu();
+				break;
+			} else {
+				System.out.println("다시 입력해주세요.");
 			}
 		}
+
 	}
 	
 	public void adminMenu() {
@@ -141,7 +164,7 @@ public class ProductMenu {
 			System.out.println("1. 상품 추가");
 			System.out.println("2. 상품 삭제");
 			System.out.println("3. 상품 수정");
-			System.out.println("4. 고객 정보 조회");
+			System.out.println("4. 회원 정보 조회");
 			System.out.println("5. 고객 거래 이력 전체 조회");
 			System.out.println("6. 로그아웃(메인으로)");
 			System.out.print("번호를 입력해주세요 : ");
