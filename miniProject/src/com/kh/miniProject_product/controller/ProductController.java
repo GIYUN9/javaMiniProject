@@ -95,6 +95,9 @@ public class ProductController {
 		}
 	}
 	
+	/**
+	 * 고객의 로그인
+	 */
 	public int customerLoginMenu(String id, String pwd) {
 		int result = new ProductService().adminLoginMenu(id, pwd);
 		
@@ -107,6 +110,9 @@ public class ProductController {
 		return result;
 	}
 	
+	/**
+	 * 고객의 자신의 정보조회
+	 */
 	public void selectCustomerInfo(String id, String pwd) {
 		ArrayList<Customer> list = new ProductService().selectCustomerInfo(id, pwd);
 		
@@ -119,6 +125,9 @@ public class ProductController {
 	
 //	================================관리자
 	
+	/**
+	 * 관리자로그인
+	 */
 	public int adminLoginMenu(String id, String pwd) {
 		int result = new ProductService().adminLoginMenu(id, pwd);
 		
