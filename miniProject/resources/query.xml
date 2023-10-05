@@ -35,7 +35,6 @@
 	<entry key="tradingList">
 		SELECT * FROM TRADING WHERE CUS_NO = ?
 	</entry>
-	customerLoginMenu
 	<entry key="customerLoginMenu">
 		SELECT * FROM CUSTOMER WHERE CUS_ID = ? AND CUS_PWD = ?
 	</entry>
@@ -55,7 +54,7 @@
 	<entry key="updateProduct">
 		UPDATE PRODUCT SET PRO_NAME = ?, PRO_PRICE = ?, PRO_AMOUNT = ?, PRO_DESCRIPTION = ? WHERE PRO_NO = ?
 	</entry>
-		<entry key="selectTradingList">
+	<entry key="selectTradingList">
 		SELECT * FROM TRADING ORDER BY TRA_DATE
 	</entry>
 </properties>

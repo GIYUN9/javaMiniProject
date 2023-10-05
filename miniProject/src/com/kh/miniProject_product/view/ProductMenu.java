@@ -94,7 +94,7 @@ public class ProductMenu {
 					pc.updateBuyTrading(cus_no, pro_no, tra_amount);
 					break;
 				case 4:
-					System.out.print("내역조회를 위해 고객(본인)번호를 입력해주세요 : ");
+					System.out.print("회원번호는 고객메뉴의 [5.회원정보 조회]에서 확인가능합니다\n내역조회를 위해 고객(본인)번호를 입력해주세요 : ");
 					int cus_noSelect = sc.nextInt();
 					sc.nextLine();
 					pc.selectTrading(cus_noSelect);
